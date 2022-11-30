@@ -13,13 +13,13 @@ public class Controller {
     // persons that didn't finish yet
     List<Person> personInTransit;
     GUI gui;
-    public static final int HEIGHT = 100;
-    public static final int WIDTH = 100;
-    public static final int NUMBER_OF_PERSON = 1000;
+    public static  int HEIGHT = 100;
+    public static  int WIDTH = 100;
+    public static  int NUMBER_OF_PERSON = 100;
     public static final int TIME_TO_SLEEP = 1;
     public static final boolean GENERATE_PERSON = true;
-    public static final boolean DISPLAY = true;
-    public static final boolean VERBOSE = true;
+    public static final boolean DISPLAY = false;
+    public static final boolean VERBOSE = false;
 
     public Controller() throws IOException, InterruptedException {
         if (GENERATE_PERSON)
@@ -38,11 +38,33 @@ public class Controller {
         }
     }
 
+    public Controller(int height, int width, int numPerson) throws IOException, InterruptedException {
+        HEIGHT = height;
+        WIDTH = width;
+        NUMBER_OF_PERSON = numPerson;
+
+        if (GENERATE_PERSON)
+            new PersonGenerator().createArrayPositionDepart();
+
+        grid=new Grid(HEIGHT,WIDTH);
+        this.personInTransit = new CSVManager().getPersonList(grid);
+
+        if (DISPLAY) {
+            gui=new GUI(grid);
+            grid.setGui(gui);
+        }
+
+        for (Person person: personInTransit){
+            grid.putPerson(person);
+        }
+    }
+
+
     /**
      * start the simulation and finish when evrybody is out of the grid
      * @throws InterruptedException
      */
-    public void execute() throws InterruptedException {
+    public long execute() throws InterruptedException {
         long startTime = System.nanoTime(); // start timer
 
         for (Person person: personInTransit){
@@ -55,10 +77,12 @@ public class Controller {
         }
 
         long stopTime = System.nanoTime(); // end timer
-        System.out.println("FINISH !");
+//        System.out.println("FINISH !");
 
         long timeInMs = (stopTime - startTime) / 1000000;
-        System.out.println("DURATION : " + timeInMs + " ms");
+//        System.out.println("DURATION : " + timeInMs + " ms");
+
+        return(timeInMs);
     }
 
     public void close() {
