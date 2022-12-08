@@ -19,6 +19,7 @@ public class Box {
             return -1;
         return person.id;
     }
+
     public synchronized boolean init(Person person) throws InterruptedException {
         if (isOccupied() != -1)   {
             person.reset=true;

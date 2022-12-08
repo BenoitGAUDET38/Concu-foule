@@ -15,7 +15,7 @@ public class Main {
             for (int j = 0; j < numPerson.length; j++) {
                 long moyenne=0;
                 for (int k = 0; k < 10 ; k++) {
-                    moyenne +=new Controller(sizes[i], sizes[i], numPerson[j]).execute();
+                    moyenne += new Controller(sizes[i], sizes[i], numPerson[j]).execute();
                 }
                 System.out.println(sizes[i] + "," + numPerson[j] + "," + moyenne/10);
             }
