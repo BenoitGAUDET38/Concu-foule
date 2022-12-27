@@ -19,13 +19,11 @@ public class Controller extends Thread{
     Position offSetPosition;
     Connector superController;
     Queue<Person> queue;
-    int index;
 
 
-    public Controller(int height, int width, Position offSetPosition, Connector superController, int index, Color color) throws IOException {
+    public Controller(int height, int width, Position offSetPosition, Connector superController, Color color) throws IOException {
         this.queue=new LinkedList<>();
         this.superController=superController;
-        this.index=index;
         this.height_y = height;
         this.width_x = width;
         this.personInTransit=new ArrayList<>();
@@ -71,7 +69,6 @@ public class Controller extends Thread{
                 }
                 else if(personDecision==Person.MOVETOACONTROLER){
                     allPersonToRemoveFromControler.add(person);
-                    System.out.println("Moved to an other controller:"+person);
                 }
             }
             superController.removePersons(allPersonToRemoveFromGame);
