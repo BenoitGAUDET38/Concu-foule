@@ -21,15 +21,17 @@ public class SuperController {
     List<Controller> controllers;
 
 
-    public SuperController() throws IOException {
+    public SuperController() throws IOException, InterruptedException {
         if (GENERATE_PERSON)
             new PersonGenerator().createArrayPositionDepart();
 
         personList = new CSVManager().getPersonList();
         Controller controller=new Controller(HEIGHT,WIDTH,new Position(0,0));
+        controller.personInTransit.addAll(personList);
         for (Person person: personInTransit){
             controller.grid.putPerson(person);
         }
+        controller.execute();
     }
 
     public void addPersonInController(Person person){

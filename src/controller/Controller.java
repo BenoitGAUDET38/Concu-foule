@@ -30,9 +30,6 @@ public class Controller {
             gui=new GUI(grid);
             grid.setGui(gui);
         }
-        for (Person person: personInTransit){
-            grid.putPerson(person);
-        }
     }
 
     /**
