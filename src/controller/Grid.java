@@ -17,7 +17,9 @@ public class Grid {
     public void moveInGrid(Position start, Position arrival, Person person){
         tab[start.y][start.x]=null;
         tab[arrival.y][arrival.x]=person;
-        gui.updatePersonPosition(person,start,arrival);
+
+        if (Controller.DISPLAY)
+            gui.updatePersonPosition(person,start,arrival);
     }
 
     public int getHeight() {
@@ -38,11 +40,15 @@ public class Grid {
 
     public void deletePerson(Position position) {
         tab[position.y][position.x]=null;
-        gui.deletePersonByPosition(position);
+
+        if (Controller.DISPLAY)
+            gui.deletePersonByPosition(position);
     }
     public void finishGame(Position position) {
         tab[position.y][position.x]=null;
-        gui.finishGame(position);
+
+        if (Controller.DISPLAY)
+            gui.finishGame(position);
     }
 
     public void putPerson(Person person) {
@@ -52,13 +58,17 @@ public class Grid {
             if (neighboor.id<person.id)
             {neighboor.destroy();
                 tab[person.position.y][person.position.x]=person;
-                gui.putPerson(person);}
+
+                if (Controller.DISPLAY)
+                    gui.putPerson(person);}
             else person.destroy();
         }
         else
         {
             tab[person.position.y][person.position.x]=person;
-            gui.putPerson(person);
+
+            if (Controller.DISPLAY)
+                gui.putPerson(person);
         }
     }
 }

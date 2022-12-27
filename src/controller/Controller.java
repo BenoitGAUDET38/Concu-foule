@@ -18,6 +18,7 @@ public class Controller {
     public static final int NUMBER_OF_PERSON = 1000;
     public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
+    public static  final boolean DISPLAY = false;
 
     public Controller() throws IOException {
         if (GENERATE_PERSON)
@@ -25,8 +26,11 @@ public class Controller {
 
         grid=new Grid(HEIGHT,WIDTH);
         this.personInTransit = new CSVManager().getPersonList(grid);
-        gui=new GUI(grid);
-        grid.setGui(gui);
+
+        if (DISPLAY) {
+            gui=new GUI(grid);
+            grid.setGui(gui);
+        }
         for (Person person: personInTransit){
             grid.putPerson(person);
         }
@@ -50,6 +54,7 @@ public class Controller {
     }
 
     public void close() {
-        gui.close();
+        if (DISPLAY)
+            gui.close();
     }
 }
