@@ -43,7 +43,7 @@ public class Controller {
         while (personInTransit.size()>0) {
             ArrayList<Person> allPersonToRemove=new ArrayList<>();
             for (Person person: personInTransit){
-                if(!person.makeChoice()) {
+                if(!person.makeChoice(grid)) {
                     allPersonToRemove.add(person);
                     System.out.println("Finished:"+person);
                 }
