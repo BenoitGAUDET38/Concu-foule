@@ -12,6 +12,11 @@ public class Person{
     int comptReset=4;
     int id;
 
+    static final int FINISH=0;
+    static final int MOVETOACONTROLER=1;
+    static final int DONOTHING=2;
+
+
 
     public Person(Position position,Position goal, int id, Color color){
         this.id=id;
@@ -53,6 +58,9 @@ public class Person{
         int move=1;
         if (position.x > goal.x)
             move = -1;
+
+        if (grid.hasToGoToOtherController(this,new Position(position.x+move,position.y))) return true;
+
         neighboor=grid.getPerson(new Position(position.x+move,position.y));
         if (clearTheWay(neighboor,grid)){
         grid.moveInGrid(position,new Position(position.x+move, position.y),this);

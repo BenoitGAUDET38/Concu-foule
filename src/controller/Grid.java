@@ -81,4 +81,11 @@ public class Grid {
 
         return(tab[position.y][position.x]);
     }
+
+    public boolean hasToGoToOtherController(Person person, Position position) {
+        position=Position.createPositionWithOffSet(position,offSetPosition);
+        if(position.x>=width|| position.x<0 ||position.y>=height|| position.y<0){
+
+        }
+    }
 }
