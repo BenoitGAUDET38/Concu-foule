@@ -50,7 +50,7 @@ public class Controller {
     }
 
     public void addNewPerson(Person person){
-
+        this.personInTransit.add(person);
         grid.putPerson(person);
     }
 
