@@ -33,7 +33,6 @@ public class Person{
      */
     public int makeChoice(Grid grid) throws Exception {
         Thread.sleep(Connector.TIME_TO_SLEEP);
-
         comptReset++;
         if (comptReset<3) {
             return DONOTHING;
@@ -41,16 +40,19 @@ public class Person{
         else if (comptReset==3){
             grid.putPerson(this);
         }
-
+        if (comptReset!=0){
         int makeMoveLine=makeMooveLine(grid);
-        if (comptReset!=0 && makeMoveLine==FINISH)
-            {int makeMoveColon=makeMoveColon(grid);
-                if(makeMoveColon==FINISH) {
-            grid.finishGame(position);
-            return FINISH;}
+        if (makeMoveLine==FINISH)
+            {
+                int makeMoveColon=makeMoveColon(grid);
+                if(makeMoveColon==FINISH)
+                {
+                    grid.finishGame(position);
+                    return FINISH;
+                }
                 else if (makeMoveColon==MOVETOACONTROLER) return(MOVETOACONTROLER);
         }
-        else if (makeMoveLine==MOVETOACONTROLER) return(MOVETOACONTROLER);
+        else if (makeMoveLine==MOVETOACONTROLER) return(MOVETOACONTROLER);}
         return DONOTHING;
     }
 

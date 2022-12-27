@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class GUI {
-    private static final int border = 800;
+    private static final int border = 400;
     private final JPanel[][] myGridPanel;
     private JFrame myFrame;
 

@@ -67,7 +67,7 @@ public class Grid {
         Person neighboor=tab[personPosition.y][personPosition.x];
         if (neighboor!=null)
         {
-            person.destroy(this);
+            person.comptReset=0;
         }
         else
         {

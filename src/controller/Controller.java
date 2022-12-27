@@ -95,7 +95,7 @@ public class Controller extends Thread{
         Controller otherController = superController.getTheConnector(position);
         person.startPosition = position;
         person.destroy(grid);
-        person.comptReset = 2;
+        person.comptReset = 3;
         otherController.addPersonInQueue(person);
     }
 
