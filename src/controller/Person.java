@@ -4,34 +4,20 @@ import java.awt.*;
 import java.util.Random;
 
 public class Person{
-    final Person [][] tab;
     Position startPosition;
     Position position;
     Position goal;
     Color color;
-    Grid grid;
     // comptReset is used to check how much round since last destruction
     int comptReset=4;
     int id;
 
-    public Person(Position position,Position goal,Grid grid,int id ){
-        this.id=id;
-        this.startPosition=position;
-        this.position=new Position(position.x,position.y);
-        this.goal=goal;
-        this.tab=grid.tab;
-        this.grid=grid;
-        Random random = new Random();
-        this.color = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
-    }
 
     public Person(Position position,Position goal, int id, Color color){
         this.id=id;
         this.startPosition=position;
         this.position=new Position(position.x,position.y);
         this.goal=goal;
-        this.tab=grid.tab;
-        this.grid=grid;
         Random random = new Random();
         this.color = color;
     }
@@ -40,7 +26,7 @@ public class Person{
      * check comptReset to know if the Person is still destroyed or not after that make move the Person.
      * @return true if he has made a choice, return false if he reached his goal
      */
-    public boolean makeChoice() throws InterruptedException {
+    public boolean makeChoice(Grid grid) throws InterruptedException {
         Thread.sleep(SuperController.TIME_TO_SLEEP);
 
         comptReset++;
@@ -60,7 +46,7 @@ public class Person{
     }
 
 
-    public boolean makeMooveLine() {
+    public boolean makeMooveLine(Grid grid) {
         Person neighboor;
         if (position.x== goal.x)
             return false;
@@ -76,7 +62,7 @@ public class Person{
     }
 
 
-    public boolean makeMoveColon() {
+    public boolean makeMoveColon(Grid grid) {
         Person neighboor;
         if (position.y == goal.y)
             return false;
@@ -95,7 +81,7 @@ public class Person{
     /**
      * remove himself from the grid and will restart at his initial position in 3 rounds
      */
-    void destroy() {
+    void destroy(Grid grid) {
         grid.deletePerson(position);
         position=new Position(startPosition.x,startPosition.y);
         comptReset=0;
@@ -107,7 +93,7 @@ public class Person{
      * @param neighboor
      * @return
      */
-    public boolean clearTheWay(Person neighboor){
+    public boolean clearTheWay(Person neighboor,Grid grid){
         if (neighboor==null)
             return true;
         else if (neighboor.id<this.id)
@@ -115,7 +101,7 @@ public class Person{
             return false;
         }
         else
-        {this.destroy();
+        {this.destroy(grid);
             return false;}
     }
 

@@ -15,6 +15,7 @@ public class SuperController {
     public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
     public static  final boolean DISPLAY = false;
+    List<Person> personInTransit;
 
     List<Person> personList;
 
@@ -24,5 +25,9 @@ public class SuperController {
             new PersonGenerator().createArrayPositionDepart();
 
         personList = new CSVManager().getPersonList();
+        Controller controller=new Controller(HEIGHT,WIDTH,new Position(0,0));
+        for (Person person: personInTransit){
+            controller.grid.putPerson(person);
+        }
     }
 }
