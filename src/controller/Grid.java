@@ -74,7 +74,7 @@ public class Grid {
             tab[personPosition.y][personPosition.x]=person;
 
             if (Connector.DISPLAY)
-                gui.putPerson(person);
+                gui.putPerson(personPosition,person);
         }
     }
 

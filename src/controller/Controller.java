@@ -66,7 +66,6 @@ public class Controller extends Thread{
                 int personDecision=person.makeChoice(grid);
                 if(personDecision==Person.FINISH) {
                     allPersonToRemoveFromGame.add(person);
-                    System.out.println("Finished:"+person);
                 }
                 else if(personDecision==Person.MOVETOACONTROLER){
                     allPersonToRemoveFromControler.add(person);
@@ -96,7 +95,7 @@ public class Controller extends Thread{
         Controller otherController = superController.getTheConnector(position);
         person.startPosition = position;
         person.destroy(grid);
-        person.comptReset = 3;
+        person.comptReset = 2;
         otherController.addPersonInQueue(person);
     }
 

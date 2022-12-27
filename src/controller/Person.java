@@ -31,7 +31,7 @@ public class Person{
      * check comptReset to know if the Person is still destroyed or not after that make move the Person.
      * @return true if he has made a choice, return false if he reached his goal
      */
-    public boolean makeChoice(Grid grid) throws Exception {
+    public int makeChoice(Grid grid) throws Exception {
         Thread.sleep(Connector.TIME_TO_SLEEP);
 
         comptReset++;
@@ -42,16 +42,20 @@ public class Person{
             grid.putPerson(this);
         }
 
-
-        if (comptReset!=0 && makeMooveLine(grid)==FINISH) if(makeMoveColon(grid)==FINISH) {
+        int makeMoveLine=makeMooveLine(grid);
+        if (comptReset!=0 && makeMoveLine==FINISH)
+            {int makeMoveColon=makeMoveColon(grid);
+                if(makeMoveColon==FINISH) {
             grid.finishGame(position);
-            return FINISH;
+            return FINISH;}
+                else if (makeMoveColon==MOVETOACONTROLER) return(MOVETOACONTROLER);
         }
+        else if (makeMoveLine==MOVETOACONTROLER) return(MOVETOACONTROLER);
         return DONOTHING;
     }
 
 
-    public boolean makeMooveLine(Grid grid) throws Exception {
+    public int makeMooveLine(Grid grid) throws Exception {
         Person neighboor;
         if (position.x== goal.x)
             return FINISH;
@@ -69,7 +73,7 @@ public class Person{
     }
 
 
-    public int makeMoveColon(Grid grid) {
+    public int makeMoveColon(Grid grid) throws Exception {
         Person neighboor;
         if (position.y == goal.y)
             return FINISH;
@@ -94,7 +98,6 @@ public class Person{
         grid.deletePerson(position);
         position=new Position(startPosition.x,startPosition.y);
         comptReset=0;
-        System.out.println("DESTROYED " + id);
     }
 
     /**

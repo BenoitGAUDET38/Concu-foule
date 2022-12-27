@@ -35,8 +35,8 @@ public class GUI {
         myGridPanel[previousPosition.getY()][previousPosition.getX()].setBackground(Color.gray);
         myGridPanel[nextPosition.getY()][nextPosition.getX()].setBackground(person.getColor());
     }
-    public void putPerson(Person person) {
-        myGridPanel[person.getPosition().getY()][person.getPosition().getX()].setBackground(person.getColor());
+    public void putPerson(Position position,Person person) {
+        myGridPanel[position.getY()][position.getX()].setBackground(person.getColor());
     }
 
     public void deletePersonByPosition(Position position) {
