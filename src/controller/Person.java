@@ -38,7 +38,7 @@ public class Person{
         }
 
 
-        if (comptReset!=0 && !makeMooveLine()) if(!makeMoveColon()) {
+        if (comptReset!=0 && !makeMooveLine(grid)) if(!makeMoveColon(grid)) {
             grid.finishGame(position);
             return false;
         }
@@ -55,7 +55,7 @@ public class Person{
             move = -1;
 
         neighboor=grid.tab[position.y][position.x+move];
-        if (clearTheWay(neighboor)){
+        if (clearTheWay(neighboor,grid)){
         grid.moveInGrid(position,new Position(position.x+move, position.y),this);
         position.x+=move;}
         return true;
@@ -72,7 +72,7 @@ public class Person{
             move = -1;
 
         neighboor=grid.tab[position.y+move][position.x];
-        if (clearTheWay(neighboor)){
+        if (clearTheWay(neighboor,grid)){
             grid.moveInGrid(position,new Position(position.x, position.y+move),this);
             position.y+=move;}
         return true;
