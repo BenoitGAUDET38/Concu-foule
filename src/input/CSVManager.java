@@ -39,7 +39,7 @@ public class CSVManager {
     public void createPersonsCSV( List<Position> startPositions, List<Position> goalPositions, List<Color> colorList) throws IOException {
         FileWriter csvWriter = new FileWriter(csvPath);
 
-        for (int i = 0; i < SuperController.NUMBER_OF_PERSON; i++) {
+        for (int i = 0; i < Connector.NUMBER_OF_PERSON; i++) {
             csvWriter.append(getLineFromPersonInfo(startPositions.get(i), goalPositions.get(i), colorList.get(i)));
         }
         csvWriter.close();

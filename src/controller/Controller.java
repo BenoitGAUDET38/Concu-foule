@@ -1,35 +1,54 @@
 package controller;
 
 import ihm.GUI;
-import input.CSVManager;
-import input.PersonGenerator;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import static controller.SuperController.DISPLAY;
+import static controller.Connector.DISPLAY;
 
-public class Controller {
+public class Controller extends Thread{
     Grid grid;
     // persons that didn't finish yet
     List<Person> personInTransit;
     GUI gui;
     int height_y, width_x;
     //position of the top left corner
-    Position position;
+    Position offSetPosition;
+    Connector superController;
+    Queue<Person> queue;
+    int index;
 
 
-    public Controller(int height, int width,Position position) throws IOException {
+    public Controller(int height, int width, Position offSetPosition, Connector superController, int index) throws IOException {
+        this.queue=new LinkedList<>();
+        this.superController=superController;
+        this.index=index;
         this.height_y = height;
         this.width_x = width;
-        grid=new Grid(height, width);
         this.personInTransit=new ArrayList<>();
+        this.offSetPosition=offSetPosition;
+        grid=new Grid(height, width,offSetPosition);
         //this.personInTransit = new CSVManager().getPersonList(grid);
 
         if (DISPLAY) {
             gui=new GUI(grid);
             grid.setGui(gui);
+        }
+    }
+    public synchronized void addPersonInQueue(Person person) {
+        queue.add(person);
+    }
+    public synchronized Person getNextPersonInQueue(){
+        return queue.poll();
+    }
+
+    @Override
+    public void run() {
+        try {
+            execute();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -38,7 +57,8 @@ public class Controller {
      * @throws InterruptedException
      */
     public void execute() throws InterruptedException {
-        while (personInTransit.size()>0) {
+        while (superController.personList.size()>0) {
+            addNewPersons();
             ArrayList<Person> allPersonToRemove=new ArrayList<>();
             for (Person person: personInTransit){
                 if(!person.makeChoice(grid)) {
@@ -46,7 +66,16 @@ public class Controller {
                     System.out.println("Finished:"+person);
                 }
             }
+            superController.removePersons(allPersonToRemove);
             personInTransit.removeAll(allPersonToRemove);
+        }
+    }
+
+    private void addNewPersons() {
+        Person person=getNextPersonInQueue();
+        while(person!=null){
+            addNewPerson(person);
+            person=getNextPersonInQueue();
         }
     }
 
@@ -68,7 +97,4 @@ public class Controller {
         return width_x;
     }
 
-    public Position getPosition() {
-        return position;
-    }
 }

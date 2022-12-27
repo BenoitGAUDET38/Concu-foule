@@ -1,8 +1,7 @@
 package input;
 
-import controller.Controller;
 import controller.Position;
-import controller.SuperController;
+import controller.Connector;
 
 import java.awt.*;
 import java.io.IOException;
@@ -15,9 +14,9 @@ public class PersonGenerator {
     CSVManager csvManager=new CSVManager();
     
     public PersonGenerator() {
-        this.height = SuperController.HEIGHT;
-        this.width = SuperController.WIDTH;
-        this.numberOfPerson=SuperController.NUMBER_OF_PERSON;
+        this.height = Connector.HEIGHT;
+        this.width = Connector.WIDTH;
+        this.numberOfPerson= Connector.NUMBER_OF_PERSON;
     }
 
     public void createArrayPositionDepart() throws IOException {

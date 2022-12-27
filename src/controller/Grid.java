@@ -7,18 +7,22 @@ public class Grid {
     int height;
     int width;
     GUI gui;
+    Position offSetPosition;
 
 
-    public Grid(int height,int width){
+    public Grid(int height,int width,Position offSetPosition){
+        this.offSetPosition=offSetPosition;
         this.height = height;
         this.width = width;
         this.tab = new Person[height][width];
     }
     public void moveInGrid(Position start, Position arrival, Person person){
+        start=Position.createPositionWithOffSet(start,offSetPosition);
+        arrival=Position.createPositionWithOffSet(arrival,offSetPosition);
         tab[start.y][start.x]=null;
         tab[arrival.y][arrival.x]=person;
 
-        if (SuperController.DISPLAY)
+        if (Connector.DISPLAY)
             gui.updatePersonPosition(person,start,arrival);
     }
 
@@ -41,13 +45,13 @@ public class Grid {
     public void deletePerson(Position position) {
         tab[position.y][position.x]=null;
 
-        if (SuperController.DISPLAY)
+        if (Connector.DISPLAY)
             gui.deletePersonByPosition(position);
     }
     public void finishGame(Position position) {
         tab[position.y][position.x]=null;
 
-        if (SuperController.DISPLAY)
+        if (Connector.DISPLAY)
             gui.finishGame(position);
     }
 
@@ -61,8 +65,12 @@ public class Grid {
         {
             tab[person.position.y][person.position.x]=person;
 
-            if (SuperController.DISPLAY)
+            if (Connector.DISPLAY)
                 gui.putPerson(person);
         }
+    }
+
+    public Person getPerson(int x, int y) {
+        return(tab[y+offSetPosition.y][x+offSetPosition.x]);
     }
 }

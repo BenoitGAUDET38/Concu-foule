@@ -27,7 +27,7 @@ public class Person{
      * @return true if he has made a choice, return false if he reached his goal
      */
     public boolean makeChoice(Grid grid) throws InterruptedException {
-        Thread.sleep(SuperController.TIME_TO_SLEEP);
+        Thread.sleep(Connector.TIME_TO_SLEEP);
 
         comptReset++;
         if (comptReset<3) {
@@ -53,8 +53,7 @@ public class Person{
         int move=1;
         if (position.x > goal.x)
             move = -1;
-
-        neighboor=grid.tab[position.y][position.x+move];
+        neighboor=grid.getPerson(position.x+move,position.y);
         if (clearTheWay(neighboor,grid)){
         grid.moveInGrid(position,new Position(position.x+move, position.y),this);
         position.x+=move;}
@@ -71,7 +70,7 @@ public class Person{
         if (position.y > goal.y)
             move = -1;
 
-        neighboor=grid.tab[position.y+move][position.x];
+        neighboor=grid.getPerson(position.x,position.y+move);
         if (clearTheWay(neighboor,grid)){
             grid.moveInGrid(position,new Position(position.x, position.y+move),this);
             position.y+=move;}
