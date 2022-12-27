@@ -8,13 +8,15 @@ public class Grid {
     int width;
     GUI gui;
     Position offSetPosition;
+    Controller controller;
 
 
-    public Grid(int height,int width,Position offSetPosition){
+    public Grid(int height,int width,Position offSetPosition, Controller controller){
         this.offSetPosition=offSetPosition;
         this.height = height;
         this.width = width;
         this.tab = new Person[height][width];
+        this.controller = controller;
     }
     public void moveInGrid(Position start, Position arrival, Person person){
         start=Position.createPositionWithOffSet(start,offSetPosition);
@@ -82,10 +84,13 @@ public class Grid {
         return(tab[position.y][position.x]);
     }
 
-    public boolean hasToGoToOtherController(Person person, Position position) {
-        position=Position.createPositionWithOffSet(position,offSetPosition);
-        if(position.x>=width|| position.x<0 ||position.y>=height|| position.y<0){
-
+    public boolean hasToGoToOtherController(Person person, Position position) throws Exception {
+        Position positionWithOffset = Position.createPositionWithOffSet(position,offSetPosition);
+        if(positionWithOffset.x>=width|| positionWithOffset.x<0 ||positionWithOffset.y>=height|| positionWithOffset.y<0){
+            controller.goToOtherController(person, position);
+            return true;
         }
+
+        return false;
     }
 }

@@ -31,7 +31,7 @@ public class Person{
      * check comptReset to know if the Person is still destroyed or not after that make move the Person.
      * @return true if he has made a choice, return false if he reached his goal
      */
-    public boolean makeChoice(Grid grid) throws InterruptedException {
+    public boolean makeChoice(Grid grid) throws Exception {
         Thread.sleep(Connector.TIME_TO_SLEEP);
 
         comptReset++;
@@ -51,7 +51,7 @@ public class Person{
     }
 
 
-    public boolean makeMooveLine(Grid grid) {
+    public boolean makeMooveLine(Grid grid) throws Exception {
         Person neighboor;
         if (position.x== goal.x)
             return false;

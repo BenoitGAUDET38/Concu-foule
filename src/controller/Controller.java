@@ -28,7 +28,7 @@ public class Controller extends Thread{
         this.width_x = width;
         this.personInTransit=new ArrayList<>();
         this.offSetPosition=offSetPosition;
-        grid=new Grid(height, width,offSetPosition);
+        grid=new Grid(height, width,offSetPosition, this);
         //this.personInTransit = new CSVManager().getPersonList(grid);
 
         if (DISPLAY) {
@@ -47,7 +47,7 @@ public class Controller extends Thread{
     public void run() {
         try {
             execute();
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -56,7 +56,7 @@ public class Controller extends Thread{
      * start the simulation and finish when evrybody is out of the grid
      * @throws InterruptedException
      */
-    public void execute() throws InterruptedException {
+    public void execute() throws Exception {
         while (superController.personList.size()>0) {
             addNewPersons();
             ArrayList<Person> allPersonToRemove=new ArrayList<>();
@@ -82,6 +82,14 @@ public class Controller extends Thread{
     public void addNewPerson(Person person){
         this.personInTransit.add(person);
         grid.putPerson(person);
+    }
+
+    public void goToOtherController(Person person, Position position) throws Exception {
+        Controller otherController = superController.getTheConnector(position);
+        person.startPosition = position;
+        person.destroy(grid);
+        person.comptReset = 3;
+        otherController.addPersonInQueue(person);
     }
 
     public void close() {
