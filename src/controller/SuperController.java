@@ -18,6 +18,7 @@ public class SuperController {
     List<Person> personInTransit;
 
     List<Person> personList;
+    List<Controller> controllers;
 
 
     public SuperController() throws IOException {
@@ -28,6 +29,11 @@ public class SuperController {
         Controller controller=new Controller(HEIGHT,WIDTH,new Position(0,0));
         for (Person person: personInTransit){
             controller.grid.putPerson(person);
+        }
+    }
+
+    public void addPersonInController(Person person){
+        for (Controller controller:controllers){
         }
     }
 }

@@ -56,4 +56,16 @@ public class Controller {
         if (DISPLAY)
             gui.close();
     }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
 }
