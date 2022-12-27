@@ -40,6 +40,7 @@ public class Person extends Thread {
      * @return true if he has made a choice, return false if he reached his goal
      */
     public boolean makeChoice() throws InterruptedException {
+//        sleep(2000);
         if (reset) {
             grid.putPerson(this);
             reset = false;
@@ -60,7 +61,6 @@ public class Person extends Thread {
                     return false;
                 }
         }
-
         return true;
     }
 

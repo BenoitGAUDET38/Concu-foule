@@ -15,11 +15,11 @@ public class Controller {
     GUI gui;
     public static final int HEIGHT = 100;
     public static final int WIDTH = 100;
-    public static final int NUMBER_OF_PERSON = 3000;
+    public static final int NUMBER_OF_PERSON = 4000;
     public static final int TIME_TO_SLEEP = 10;
     public static final boolean GENERATE_PERSON = true;
-    public static final boolean DISPLAY = true;
-    public static final boolean VERBOSE = true;
+    public static final boolean DISPLAY = false;
+    public static final boolean VERBOSE = false;
 
     public Controller() throws IOException, InterruptedException {
         if (GENERATE_PERSON)
