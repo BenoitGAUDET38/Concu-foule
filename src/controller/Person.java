@@ -41,18 +41,35 @@ public class Person{
             grid.putPerson(this);
         }
         if (comptReset!=0){
-        int makeMoveLine=makeMooveLine(grid);
-        if (makeMoveLine==FINISH)
-            {
-                int makeMoveColon=makeMoveColon(grid);
-                if(makeMoveColon==FINISH)
-                {
-                    grid.finishGame(position);
-                    return FINISH;
+            if (new Random().nextBoolean()){
+                int makeMoveLine=makeMooveLine(grid);
+                if (makeMoveLine==FINISH)
+                    {
+                        int makeMoveColon=makeMoveColon(grid);
+                        if(makeMoveColon==FINISH)
+                        {
+                            grid.finishGame(position);
+                            return FINISH;
+                        }
+                        else if (makeMoveColon==MOVETOACONTROLER) return(MOVETOACONTROLER);
                 }
-                else if (makeMoveColon==MOVETOACONTROLER) return(MOVETOACONTROLER);
+                else if (makeMoveLine==MOVETOACONTROLER) return(MOVETOACONTROLER);
+            }
+            else{
+                int makeMoveColumn=makeMoveColon(grid);
+                if (makeMoveColumn==FINISH)
+                {
+                    int makeMoveLine=makeMooveLine(grid);
+                    if(makeMoveLine==FINISH)
+                    {
+                        grid.finishGame(position);
+                        return FINISH;
+                    }
+                    else if (makeMoveLine==MOVETOACONTROLER) return(MOVETOACONTROLER);
+                }
+                else if (makeMoveColumn==MOVETOACONTROLER) return(MOVETOACONTROLER);
+            }
         }
-        else if (makeMoveLine==MOVETOACONTROLER) return(MOVETOACONTROLER);}
         return DONOTHING;
     }
 

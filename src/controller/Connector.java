@@ -12,10 +12,10 @@ import java.util.Queue;
 
 public class Connector {
 
-    public static final int HEIGHT = 10;
-    public static final int WIDTH = 10;
-    public static final int NUMBER_OF_PERSON = 1000;
-    public static final int TIME_TO_SLEEP = 1;
+    public static final int HEIGHT = 100;
+    public static final int WIDTH = 100;
+    public static final int NUMBER_OF_PERSON = 10000;
+    public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
     public static  final boolean DISPLAY = false;
     List<Person> personList;
