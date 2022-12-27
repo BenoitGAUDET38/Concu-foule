@@ -30,9 +30,6 @@ public class Controller {
             gui=new GUI(grid);
             grid.setGui(gui);
         }
-        for (Person person: personInTransit){
-            grid.putPerson(person);
-        }
     }
 
     /**
@@ -50,6 +47,11 @@ public class Controller {
             }
             personInTransit.removeAll(allPersonToRemove);
         }
+    }
+
+    public void addNewPerson(Person person){
+
+        grid.putPerson(person);
     }
 
     public void close() {
