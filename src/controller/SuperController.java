@@ -1,5 +1,6 @@
 package controller;
 
+import ihm.GUI;
 import input.CSVManager;
 import input.PersonGenerator;
 
@@ -27,9 +28,8 @@ public class SuperController {
 
         personList = new CSVManager().getPersonList();
         Controller controller=new Controller(HEIGHT,WIDTH,new Position(0,0));
-        controller.personInTransit.addAll(personList);
         for (Person person: personInTransit){
-            controller.grid.putPerson(person);
+            controller.addNewPerson(person);
         }
         controller.execute();
     }
