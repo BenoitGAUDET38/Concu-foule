@@ -24,6 +24,7 @@ public class Controller {
         this.height_y = height;
         this.width_x = width;
         grid=new Grid(height, width);
+        this.personInTransit=new ArrayList<>();
         //this.personInTransit = new CSVManager().getPersonList(grid);
 
         if (DISPLAY) {

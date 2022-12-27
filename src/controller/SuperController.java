@@ -15,8 +15,7 @@ public class SuperController {
     public static final int NUMBER_OF_PERSON = 1000;
     public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
-    public static  final boolean DISPLAY = false;
-    List<Person> personInTransit;
+    public static  final boolean DISPLAY = true;
 
     List<Person> personList;
     List<Controller> controllers;
@@ -28,8 +27,8 @@ public class SuperController {
 
         personList = new CSVManager().getPersonList();
         Controller controller=new Controller(HEIGHT,WIDTH,new Position(0,0));
-        for (Person person: personInTransit){
-            controller.addNewPerson(person);
+        for (Person person: personList){
+            addPersonInController(person);
         }
         controller.execute();
     }
@@ -37,7 +36,7 @@ public class SuperController {
     public void addPersonInController(Person person){
         for (Controller controller:controllers){
             if (person.position.x >= controller.position.x && person.position.x < controller.position.x + controller.getHeight())
-                return;
+                controller.addNewPerson(person);
         }
     }
 }
