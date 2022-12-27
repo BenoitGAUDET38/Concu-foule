@@ -53,7 +53,7 @@ public class Person{
         int move=1;
         if (position.x > goal.x)
             move = -1;
-        neighboor=grid.getPerson(position.x+move,position.y);
+        neighboor=grid.getPerson(new Position(position.x+move,position.y));
         if (clearTheWay(neighboor,grid)){
         grid.moveInGrid(position,new Position(position.x+move, position.y),this);
         position.x+=move;}
@@ -70,7 +70,7 @@ public class Person{
         if (position.y > goal.y)
             move = -1;
 
-        neighboor=grid.getPerson(position.x,position.y+move);
+        neighboor=grid.getPerson(new Position(position.x,position.y+move));
         if (clearTheWay(neighboor,grid)){
             grid.moveInGrid(position,new Position(position.x, position.y+move),this);
             position.y+=move;}

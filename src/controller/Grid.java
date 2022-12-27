@@ -43,12 +43,16 @@ public class Grid {
     }
 
     public void deletePerson(Position position) {
+        position=Position.createPositionWithOffSet(position,offSetPosition);
+
         tab[position.y][position.x]=null;
 
         if (Connector.DISPLAY)
             gui.deletePersonByPosition(position);
     }
     public void finishGame(Position position) {
+        position=Position.createPositionWithOffSet(position,offSetPosition);
+
         tab[position.y][position.x]=null;
 
         if (Connector.DISPLAY)
@@ -56,21 +60,25 @@ public class Grid {
     }
 
     public void putPerson(Person person) {
-        Person neighboor=tab[person.position.y][person.position.x];
+        Position personPosition=Position.createPositionWithOffSet(person.getPosition(),offSetPosition);
+
+        Person neighboor=tab[personPosition.y][personPosition.x];
         if (neighboor!=null)
         {
             person.destroy(this);
         }
         else
         {
-            tab[person.position.y][person.position.x]=person;
+            tab[personPosition.y][personPosition.x]=person;
 
             if (Connector.DISPLAY)
                 gui.putPerson(person);
         }
     }
 
-    public Person getPerson(int x, int y) {
-        return(tab[y+offSetPosition.y][x+offSetPosition.x]);
+    public Person getPerson(Position position) {
+        position=Position.createPositionWithOffSet(position,offSetPosition);
+
+        return(tab[position.y][position.x]);
     }
 }
