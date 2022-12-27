@@ -98,8 +98,7 @@ public class Person{
             return true;
         else if (neighboor.id<this.id)
         {
-            neighboor.destroy(grid);
-            return true;
+            return false;
         }
         else
         {this.destroy(grid);
