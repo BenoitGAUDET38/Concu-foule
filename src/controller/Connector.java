@@ -14,12 +14,12 @@ import java.util.Queue;
 
 public class Connector {
 
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 20;
-    public static final int NUMBER_OF_PERSON = 100;
-    public static final int TIME_TO_SLEEP = 100;
+    public static final int HEIGHT = 100;
+    public static final int WIDTH = 100;
+    public static final int NUMBER_OF_PERSON = 3000;
+    public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
-    public static  final boolean DISPLAY = false;
+    public static  final boolean DISPLAY = true;
     List<Person> personList;
     List<Controller> controllers;
     MainGUI mainGUI;
@@ -38,7 +38,8 @@ public class Connector {
         for (Controller controller : controllers) {
             guis.add(controller.gui);
         }
-        mainGUI = new MainGUI(guis);
+        if (DISPLAY)
+            mainGUI = new MainGUI(guis);
 
         for (Person person: personList){
             addPersonInController(person);
@@ -57,7 +58,9 @@ public class Connector {
             Thread.sleep(400);
         }
         System.out.println("=====================IS EMPTY==========================");
-        mainGUI.close();
+
+        if (DISPLAY)
+            mainGUI.close();
     }
 
     public void addPersonInController(Person person) throws Exception {
