@@ -59,15 +59,23 @@ public class Controller extends Thread{
     public void execute() throws InterruptedException {
         while (superController.personList.size()>0) {
             addNewPersons();
-            ArrayList<Person> allPersonToRemove=new ArrayList<>();
+            ArrayList<Person> allPersonToRemoveFromControler=new ArrayList<>();
+            ArrayList<Person> allPersonToRemoveFromGame=new ArrayList<>();
+
             for (Person person: personInTransit){
-                if(!person.makeChoice(grid)) {
-                    allPersonToRemove.add(person);
+                int personDecision=person.makeChoice(grid);
+                if(personDecision==Person.FINISH) {
+                    allPersonToRemoveFromGame.add(person);
                     System.out.println("Finished:"+person);
                 }
+                else if(personDecision==Person.MOVETOACONTROLER){
+                    allPersonToRemoveFromControler.add(person);
+                    System.out.println("Moved to an other controller:"+person);
+                }
             }
-            superController.removePersons(allPersonToRemove);
-            personInTransit.removeAll(allPersonToRemove);
+            superController.removePersons(allPersonToRemoveFromGame);
+            personInTransit.removeAll(allPersonToRemoveFromGame);
+            personInTransit.removeAll(allPersonToRemoveFromControler);
         }
     }
 

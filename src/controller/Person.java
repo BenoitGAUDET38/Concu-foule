@@ -31,58 +31,60 @@ public class Person{
      * check comptReset to know if the Person is still destroyed or not after that make move the Person.
      * @return true if he has made a choice, return false if he reached his goal
      */
-    public boolean makeChoice(Grid grid) throws InterruptedException {
+    public int makeChoice(Grid grid) throws InterruptedException {
         Thread.sleep(Connector.TIME_TO_SLEEP);
 
         comptReset++;
         if (comptReset<3) {
-            return true;
+            return DONOTHING;
         }
         else if (comptReset==3){
             grid.putPerson(this);
         }
 
 
-        if (comptReset!=0 && !makeMooveLine(grid)) if(!makeMoveColon(grid)) {
+        if (comptReset!=0 && makeMooveLine(grid)==FINISH) if(makeMoveColon(grid)==FINISH) {
             grid.finishGame(position);
-            return false;
+            return FINISH;
         }
-        return true;
+        return DONOTHING;
     }
 
 
-    public boolean makeMooveLine(Grid grid) {
+    public int makeMooveLine(Grid grid) {
         Person neighboor;
         if (position.x== goal.x)
-            return false;
+            return FINISH;
         int move=1;
         if (position.x > goal.x)
             move = -1;
 
-        if (grid.hasToGoToOtherController(this,new Position(position.x+move,position.y))) return true;
+        if (grid.hasToGoToOtherController(this,new Position(position.x+move,position.y))) return MOVETOACONTROLER;
 
         neighboor=grid.getPerson(new Position(position.x+move,position.y));
         if (clearTheWay(neighboor,grid)){
         grid.moveInGrid(position,new Position(position.x+move, position.y),this);
         position.x+=move;}
-        return true;
+        return DONOTHING;
     }
 
 
-    public boolean makeMoveColon(Grid grid) {
+    public int makeMoveColon(Grid grid) {
         Person neighboor;
         if (position.y == goal.y)
-            return false;
+            return FINISH;
 
         int move = 1;
         if (position.y > goal.y)
             move = -1;
 
+        if (grid.hasToGoToOtherController(this,new Position(position.x,position.y+move))) return MOVETOACONTROLER;
+
         neighboor=grid.getPerson(new Position(position.x,position.y+move));
         if (clearTheWay(neighboor,grid)){
             grid.moveInGrid(position,new Position(position.x, position.y+move),this);
             position.y+=move;}
-        return true;
+        return DONOTHING;
     }
 
     /**
