@@ -2,8 +2,10 @@ package controller;
 
 import ihm.GUI;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 import static controller.Connector.DISPLAY;
 
@@ -20,7 +22,7 @@ public class Controller extends Thread{
     int index;
 
 
-    public Controller(int height, int width, Position offSetPosition, Connector superController, int index) throws IOException {
+    public Controller(int height, int width, Position offSetPosition, Connector superController, int index, Color color) throws IOException {
         this.queue=new LinkedList<>();
         this.superController=superController;
         this.index=index;
@@ -32,7 +34,7 @@ public class Controller extends Thread{
         //this.personInTransit = new CSVManager().getPersonList(grid);
 
         if (DISPLAY) {
-            gui=new GUI(grid);
+            gui=new GUI(grid, color);
             grid.setGui(gui);
         }
     }
@@ -100,8 +102,8 @@ public class Controller extends Thread{
     }
 
     public void close() {
-        if (DISPLAY)
-            gui.close();
+//        if (DISPLAY)
+//            gui.close();
     }
 
     public int getHeight() {

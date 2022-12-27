@@ -13,26 +13,26 @@ import java.util.Objects;
 public class GUI {
     private static final int border = 400;
     private final JPanel[][] myGridPanel;
-    private JFrame myFrame;
+    JPanel myPanel;
+    Color myColor;
 
-    public GUI(Grid grid) {
-        /**
-         * TODO IMPLEMENTATION DE RUNNABLE ?
-         */
+    public GUI(Grid grid, Color color) {
         myGridPanel = setupGridPanel(grid);
+        myColor = color;
 
-        myFrame = setupFrame();
-        JPanel panel = setupMainPanel(grid);
-        myFrame.setContentPane(panel);
+        myPanel = setupMainPanel(grid);
         for (JPanel[] jpanels:myGridPanel){
             for (JPanel jpanel:jpanels)
-                jpanel.setBackground(Color.gray);
+                jpanel.setBackground(myColor);
         }
-        myFrame.setVisible(true);
+    }
+
+    public JPanel getMyPanel() {
+        return myPanel;
     }
 
     public void updatePersonPosition(Person person, Position previousPosition, Position nextPosition) {
-        myGridPanel[previousPosition.getY()][previousPosition.getX()].setBackground(Color.gray);
+        myGridPanel[previousPosition.getY()][previousPosition.getX()].setBackground(myColor);
         myGridPanel[nextPosition.getY()][nextPosition.getX()].setBackground(person.getColor());
     }
     public void putPerson(Position position,Person person) {
@@ -40,10 +40,10 @@ public class GUI {
     }
 
     public void deletePersonByPosition(Position position) {
-        myGridPanel[position.getY()][position.getX()].setBackground(Color.gray);
+        myGridPanel[position.getY()][position.getX()].setBackground(myColor);
     }
     public void finishGame(Position position) {
-        myGridPanel[position.getY()][position.getX()].setBackground(Color.gray);
+        myGridPanel[position.getY()][position.getX()].setBackground(myColor);
         myGridPanel[position.getY()][position.getX()].setBorder(BorderFactory.createLineBorder(Color.red));
     }
 
@@ -78,31 +78,6 @@ public class GUI {
         }
 
         return gridPanel;
-    }
-
-    JFrame setupFrame() {
-        JFrame frame = new JFrame();
-        frame.setSize(border, border);
-        frame.setResizable(true);
-        frame.setTitle("Super Concurrence Simulator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // try to get icon image
-        try {
-            ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("images\\icon.png")));
-            frame.setIconImage(icon.getImage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // center frame
-        frame.setLocationRelativeTo(null);
-
-        return frame;
-    }
-
-    public void close() {
-        myFrame.dispose();
     }
 
 }
