@@ -16,10 +16,11 @@ public class Controller {
     List<Person> personInTransit;
     GUI gui;
     int height, width;
-    int heightOffset, widthOffset;
+    //position of the top left corner
+    Position position;
 
 
-    public Controller(int height, int width) throws IOException {
+    public Controller(int height, int width,Position position) throws IOException {
         this.height = height;
         this.width = width;
         grid=new Grid(height, width);
