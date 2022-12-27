@@ -12,12 +12,12 @@ import java.util.Queue;
 
 public class Connector {
 
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 20;
-    public static final int NUMBER_OF_PERSON = 100;
-    public static final int TIME_TO_SLEEP = 0;
+    public static final int HEIGHT = 10;
+    public static final int WIDTH = 10;
+    public static final int NUMBER_OF_PERSON = 1000;
+    public static final int TIME_TO_SLEEP = 1;
     public static final boolean GENERATE_PERSON = true;
-    public static  final boolean DISPLAY = true;
+    public static  final boolean DISPLAY = false;
     List<Person> personList;
     List<Controller> controllers;
 
@@ -33,18 +33,30 @@ public class Connector {
         for (Person person: personList){
             addPersonInController(person);
         }
-        for (Controller contr: controllers){
+        /**for (Controller contr: controllers){
             contr.start();
-        }
+        }**/
+
+        controllers.get(3).start();
+        controllers.get(1).start();
+        controllers.get(0).start();
+        controllers.get(2).start();
+
         while(!personList.isEmpty()){
-            Thread.sleep(1000);
-            System.out.println(personList.size());
+            System.out.println("===========================================================");
+            System.out.println("controler0:"+controllers.get(0).personInTransit.size());
+            System.out.println("controler1:"+controllers.get(1).personInTransit.size());
+            System.out.println("controler2:"+controllers.get(2).personInTransit.size());
+            System.out.println("controler3:"+controllers.get(3).personInTransit.size());
+            System.out.println("===========================================================");
+            Thread.sleep(400);
         }
         System.out.println("=====================IS EMPTY==========================");
     }
 
     public void addPersonInController(Person person) throws Exception {
-        getTheConnector(person.position).addPersonInQueue(person);
+        //getTheConnector(person.position).addPersonInQueue(person);
+        getTheConnector(person.position).addNewPerson(person);
     }
 
     public Controller getTheConnector(Position position) throws Exception {
@@ -60,10 +72,10 @@ public class Connector {
     public void createControlers() throws IOException {
         int midHeight=HEIGHT/2;
         int midWidth=WIDTH/2;
-        controllers.add(new Controller(midHeight,midWidth,new Position(0,0),this,0));
-        controllers.add(new Controller(midHeight,WIDTH-midWidth,new Position(midWidth,0),this,0));
-        controllers.add(new Controller(HEIGHT-midWidth,midWidth,new Position(0,midHeight),this,0));
-        controllers.add(new Controller(HEIGHT-midWidth,WIDTH-midWidth,new Position(midWidth,midHeight),this,0));
+        controllers.add(new Controller(midHeight,midWidth,new Position(0,0),this));
+        controllers.add(new Controller(midHeight,WIDTH-midWidth,new Position(midWidth,0),this));
+        controllers.add(new Controller(HEIGHT-midHeight,midWidth,new Position(0,midHeight),this));
+        controllers.add(new Controller(HEIGHT-midHeight,WIDTH-midWidth,new Position(midWidth,midHeight),this));
     }
 
 
