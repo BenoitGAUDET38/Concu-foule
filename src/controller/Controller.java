@@ -49,6 +49,11 @@ public class Controller {
         }
     }
 
+    public void addNewPerson(Person person){
+
+        grid.putPerson(person);
+    }
+
     public void close() {
         if (DISPLAY)
             gui.close();
