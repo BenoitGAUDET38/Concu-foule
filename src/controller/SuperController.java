@@ -34,6 +34,8 @@ public class SuperController {
 
     public void addPersonInController(Person person){
         for (Controller controller:controllers){
+            if (person.position.x >= controller.position.x && person.position.x < controller.position.x + controller.getHeight())
+                return;
         }
     }
 }

@@ -15,14 +15,14 @@ public class Controller {
     // persons that didn't finish yet
     List<Person> personInTransit;
     GUI gui;
-    int height, width;
+    int height_y, width_x;
     //position of the top left corner
     Position position;
 
 
     public Controller(int height, int width,Position position) throws IOException {
-        this.height = height;
-        this.width = width;
+        this.height_y = height;
+        this.width_x = width;
         grid=new Grid(height, width);
         //this.personInTransit = new CSVManager().getPersonList(grid);
 
@@ -58,11 +58,11 @@ public class Controller {
     }
 
     public int getHeight() {
-        return height;
+        return height_y;
     }
 
     public int getWidth() {
-        return width;
+        return width_x;
     }
 
     public Position getPosition() {
