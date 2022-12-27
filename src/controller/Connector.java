@@ -33,14 +33,9 @@ public class Connector {
         for (Person person: personList){
             addPersonInController(person);
         }
-        /**for (Controller contr: controllers){
+        for (Controller contr: controllers){
             contr.start();
-        }**/
-
-        controllers.get(3).start();
-        controllers.get(1).start();
-        controllers.get(0).start();
-        controllers.get(2).start();
+        }
 
         while(!personList.isEmpty()){
             System.out.println("===========================================================");
