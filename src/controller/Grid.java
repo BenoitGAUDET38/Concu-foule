@@ -18,7 +18,7 @@ public class Grid {
         tab[start.y][start.x]=null;
         tab[arrival.y][arrival.x]=person;
 
-        if (Controller.DISPLAY)
+        if (SuperController.DISPLAY)
             gui.updatePersonPosition(person,start,arrival);
     }
 
@@ -41,13 +41,13 @@ public class Grid {
     public void deletePerson(Position position) {
         tab[position.y][position.x]=null;
 
-        if (Controller.DISPLAY)
+        if (SuperController.DISPLAY)
             gui.deletePersonByPosition(position);
     }
     public void finishGame(Position position) {
         tab[position.y][position.x]=null;
 
-        if (Controller.DISPLAY)
+        if (SuperController.DISPLAY)
             gui.finishGame(position);
     }
 
@@ -59,7 +59,7 @@ public class Grid {
             {neighboor.destroy();
                 tab[person.position.y][person.position.x]=person;
 
-                if (Controller.DISPLAY)
+                if (SuperController.DISPLAY)
                     gui.putPerson(person);}
             else person.destroy();
         }
@@ -67,7 +67,7 @@ public class Grid {
         {
             tab[person.position.y][person.position.x]=person;
 
-            if (Controller.DISPLAY)
+            if (SuperController.DISPLAY)
                 gui.putPerson(person);
         }
     }

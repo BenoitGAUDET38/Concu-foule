@@ -25,7 +25,7 @@ public class Person{
         this.color = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
     }
 
-    public Person(Position position,Position goal,Grid grid,int id, Color color){
+    public Person(Position position,Position goal, int id, Color color){
         this.id=id;
         this.startPosition=position;
         this.position=new Position(position.x,position.y);
@@ -41,7 +41,7 @@ public class Person{
      * @return true if he has made a choice, return false if he reached his goal
      */
     public boolean makeChoice() throws InterruptedException {
-        Thread.sleep(Controller.TIME_TO_SLEEP);
+        Thread.sleep(SuperController.TIME_TO_SLEEP);
 
         comptReset++;
         if (comptReset<3) {
