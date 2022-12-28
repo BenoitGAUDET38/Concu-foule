@@ -14,12 +14,12 @@ import java.util.Queue;
 
 public class Connector {
 
-    public static int HEIGHT = 20;
-    public static int WIDTH = 20;
+    public static int HEIGHT = 100;
+    public static int WIDTH = 100;
     public static int NUMBER_OF_PERSON = 100;
     public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
-    public static  final boolean DISPLAY = true;
+    public static  final boolean DISPLAY = false;
     public static  final boolean VERBOSE = false;
     List<Person> personList;
     List<Controller> controllers;
