@@ -14,12 +14,13 @@ import java.util.Queue;
 
 public class Connector {
 
-    public static final int HEIGHT = 100;
-    public static final int WIDTH = 100;
-    public static final int NUMBER_OF_PERSON = 3000;
-    public static final int TIME_TO_SLEEP = 0;
+    public static final int HEIGHT = 20;
+    public static final int WIDTH = 20;
+    public static final int NUMBER_OF_PERSON = 100;
+    public static final int TIME_TO_SLEEP = 10;
     public static final boolean GENERATE_PERSON = true;
     public static  final boolean DISPLAY = true;
+    public static  final boolean VERBOSE = false;
     List<Person> personList;
     List<Controller> controllers;
     MainGUI mainGUI;
@@ -44,20 +45,34 @@ public class Connector {
         for (Person person: personList){
             addPersonInController(person);
         }
+
+        long startTime = System.nanoTime();
+
         for (Controller contr: controllers){
             contr.start();
         }
 
-        while(!personList.isEmpty()){
-            System.out.println("===========================================================");
-            System.out.println("controler0:"+controllers.get(0).personInTransit.size());
-            System.out.println("controler1:"+controllers.get(1).personInTransit.size());
-            System.out.println("controler2:"+controllers.get(2).personInTransit.size());
-            System.out.println("controler3:"+controllers.get(3).personInTransit.size());
-            System.out.println("===========================================================");
-            Thread.sleep(400);
+        for (Controller contr: controllers) {
+            contr.join();
         }
-        System.out.println("=====================IS EMPTY==========================");
+
+        if (VERBOSE) {
+            while(!personList.isEmpty()){
+                System.out.println("===========================================================");
+                System.out.println("controler0:"+controllers.get(0).personInTransit.size());
+                System.out.println("controler1:"+controllers.get(1).personInTransit.size());
+                System.out.println("controler2:"+controllers.get(2).personInTransit.size());
+                System.out.println("controler3:"+controllers.get(3).personInTransit.size());
+                System.out.println("===========================================================");
+                Thread.sleep(400);
+            }
+            System.out.println("=====================IS EMPTY==========================");
+        }
+
+        long stopTime = System.nanoTime();
+        long timeInMs = (stopTime - startTime) / 1000000;
+
+        System.out.println(timeInMs);
 
         if (DISPLAY)
             mainGUI.close();
