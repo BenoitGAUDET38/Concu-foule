@@ -14,10 +14,10 @@ import java.util.Queue;
 
 public class Connector {
 
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 20;
-    public static final int NUMBER_OF_PERSON = 100;
-    public static final int TIME_TO_SLEEP = 10;
+    public static final int HEIGHT = 100;
+    public static final int WIDTH = 100;
+    public static final int NUMBER_OF_PERSON = 3000;
+    public static final int TIME_TO_SLEEP = 0;
     public static final boolean GENERATE_PERSON = true;
     public static  final boolean DISPLAY = true;
     public static  final boolean VERBOSE = false;
@@ -27,8 +27,11 @@ public class Connector {
     List<GUI> guis;
 
 
-    public Connector() throws Exception {
+    public Connector() {
 
+    }
+
+    public void executeSimulation() throws Exception {
         if (GENERATE_PERSON)
             new PersonGenerator().createArrayPositionDepart();
         controllers=new ArrayList<>();
@@ -72,7 +75,7 @@ public class Connector {
         long stopTime = System.nanoTime();
         long timeInMs = (stopTime - startTime) / 1000000;
 
-        System.out.println(timeInMs);
+        System.out.println("Temps d'exécution : " + timeInMs + " ms");
 
         if (DISPLAY)
             mainGUI.close();
